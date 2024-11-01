@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Contraseña</title>
+    <style>
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+        }
+
+        
+        #loginForm {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        
+        input[type="password"] {
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #2196F3;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="password"]:focus {
+            border-color: #0d47a1;
+            outline: none;
+        }
+
+        
+        button {
+            background-color: #2196F3;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        
+        #mensaje {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginForm">
+        <h2>Ingresa tu Contraseña</h2>
+        
+        <input type="password" id="contraseña" placeholder="Contraseña" required>
+        <button onclick="verificarContraseña()">Verificar</button>
+
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        const contraseñaCorrecta = "contraseña"; 
+        let intentos = 0; 
+
+        function verificarContraseña() {
+            const inputContraseña = document.getElementById("contraseña").value;
+            const mensaje = document.getElementById("mensaje");
+
+            if (inputContraseña === contraseñaCorrecta) {
+                mensaje.textContent = "¡Contraseña correcta! Acceso permitido.";
+                mensaje.style.color = "#388E3C"; 
+            } else {
+                intentos++;
+                mensaje.textContent = "Contraseña incorrecta. Intenta nuevamente.";
+                
+                document.getElementById("contraseña").value = "";
+
+                
+                if (intentos >= 10) {
+                    mensaje.textContent = "Demasiados intentos. Acceso denegado.";
+                    document.querySelector("button").disabled = true; 
+                }
+            }
+        }
+    </script>
+</body>
+</html>

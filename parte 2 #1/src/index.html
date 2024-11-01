@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promedio de Números</title>
+    <style>
+        /* Estilos básicos para centrar el contenido */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4c3, #c5e1a5);
+        }
+
+        /* Contenedor de formulario */
+        #promedioForm {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        /* Estilo de encabezado */
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Estilo de campo de entrada */
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #66bb6a;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #43a047;
+            outline: none;
+        }
+
+        /* Estilo del botón */
+        button {
+            background-color: #66bb6a;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #43a047;
+        }
+
+        /* Estilo para el resultado */
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="promedioForm">
+        <h2>Promedio de Números</h2>
+        
+        <form onsubmit="calcularPromedio(event)">
+            <input type="text" id="numeros" placeholder="Ingresa números separados por comas" required>
+            <button type="submit">Calcular Promedio</button>
+        </form>
+
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function calcularPromedio(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+
+            const input = document.getElementById("numeros").value;
+            const arregloNumeros = input.split(',').map(Number); // Crear un arreglo de números
+            const sumaTotal = arregloNumeros.reduce((total, num) => total + num, 0); // Calcular la suma
+
+            const cantidad = arregloNumeros.length; // Cantidad de números
+            const promedio = sumaTotal / cantidad; // Calcular el promedio
+
+            const resultado = document.getElementById("resultado");
+            resultado.textContent = "El promedio es: " + promedio.toFixed(2); // Mostrar el promedio con dos decimales
+        }
+    </script>
+</body>
+</html>
