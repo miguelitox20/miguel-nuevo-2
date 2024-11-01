@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monto de Compra</title>
+    <style>
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffccbc, #bcaaa4);
+        }
+
+        
+        #compraForm {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        
+        input[type="number"] {
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #ff7043;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #ffab91;
+            outline: none;
+        }
+
+       
+        button {
+            background-color: #ff7043;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f4511e;
+        }
+
+        
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="compraForm">
+        <h2>Ingrese el Monto de su Compra</h2>
+        
+        <form>
+            <input type="number" id="monto" name="monto" required min="0" step="0.01">
+            <button type="button" onclick="mostrarMonto()">Enviar</button>
+        </form>
+
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function mostrarMonto() {
+            const monto = parseFloat(document.getElementById("monto").value);
+            const resultado = document.getElementById("resultado");
+
+            if (!isNaN(monto) && monto >= 0) {
+                let mensaje = `El monto total de su compra es: $${monto.toFixed(2)}`;
+
+                if (monto > 100) {
+                    const descuento = monto * 0.10; // 10% de descuento
+                    const montoConDescuento = monto - descuento;
+                    mensaje += `<br>¡Felicidades! Se aplica un descuento del 10%.`;
+                    mensaje += `<br>El monto con descuento es: $${montoConDescuento.toFixed(2)}`;
+                } else {
+                    mensaje += `<br>No se aplica descuento, ya que el monto es menor o igual a $100.`;
+                    mensaje += `<br>El monto final a pagar es: $${monto.toFixed(2)}`;
+                }
+
+                resultado.innerHTML = mensaje;
+                resultado.style.color = "green";
+            } else {
+                resultado.textContent = "Por favor, ingrese un monto válido.";
+                resultado.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
